@@ -72,14 +72,13 @@ class MainActivity : AppCompatActivity() {
         //toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-            toolbar.title = "Jr Calculator"
+        toolbar.title = "Jr Calculator"
 
 
 
         binding.buttonDEL.setOnClickListener {
             if (screenValue.length>0 && screenValue.length!=1){
                 screenValue=screenValue.subSequence(0,screenValue.length-1).toString()
-                Log.d("msg","aaaah ${screenValue}")
             }else{
                 if(screenValue.length==1){
                     screenValue=""
@@ -170,6 +169,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.buttonEqual.setOnClickListener {
+            if(screenValue==""){
+                screenValue="0"
+            }
             if(!viewModel.salvaElementos(screenValue)){
                 Toast.makeText(this,"Operação Inválida", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
@@ -253,10 +255,4 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-
-        Log.d("Main Activity","Mudo configuracao UI para ${newConfig.uiMode} <---------------------------")
-
-    }
 }
