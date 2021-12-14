@@ -33,7 +33,7 @@ class SplashScreen : AppCompatActivity() {
             it.printStackTrace()
         }
 
-        binding.logoImage.animate().translationY(-520f).setDuration(1000).setStartDelay(0)
+        //binding.logoImage.animate().translationY(-700f).setDuration(1000).setStartDelay(0)
 
         lifecycleScope.launch {
             delay(2000)
