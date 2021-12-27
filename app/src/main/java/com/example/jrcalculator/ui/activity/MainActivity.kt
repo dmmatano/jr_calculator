@@ -2,11 +2,9 @@ package com.example.jrcalculator.ui.activity
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
@@ -40,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val darkMode=sharedPreferences.getBoolean("darkMode", false)
 
+        //NightMode configuration
         if(darkMode){
             binding.chipNight.isChecked=true
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -48,8 +47,7 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
-
-        //add logica com os chips
+        //add chips logic
         binding.chipDay.setOnClickListener {
 
             sharedPreferences.edit(true){
@@ -72,10 +70,9 @@ class MainActivity : AppCompatActivity() {
         //toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        toolbar.title = "Jr Calculator"
+        toolbar.title = "Jr. Calculator"
 
-
-
+        //buttons configs
         binding.buttonDEL.setOnClickListener {
             if (screenValue.length>0 && screenValue.length!=1){
                 screenValue=screenValue.subSequence(0,screenValue.length-1).toString()
@@ -88,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 return@setOnClickListener
             }
+
             binding.display.text=screenValue
             when (screenValue[screenValue.length-1]){
                 '+'->{
