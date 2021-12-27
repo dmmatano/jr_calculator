@@ -1,0 +1,41 @@
+name: tag-publish
+
+on:
+  push:
+    tags:
+      - "v[0-9].[0-9]+.[0-9]+"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2.5.0
+        with:
+          java-version: '11'
+          distribution: 'microsoft'
+          
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+      
+      - name: Build with Gradle
+        run: ./gradlew build
+        
+      - name: Get tag
+        run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV      
+        
+      - name: Copy apk to dir
+        run: | 
+          cp 'app/build/outputs/apk/debug/app-debug.apk' 'Jr_Calculator_${{env.TAG}}.apk'
+          
+      - name: Zip it !
+        run: | 
+          zip  'Jr_Calculator_Android_${{env.TAG}}.zip' 'Jr_Calculator_${{env.TAG}}.apk' 'Jr Calculator - Version History.txt'
+        
+      - name: Upload a Zip file
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: JrCalc
+          path: JrCalcAndroid_${{env.TAG}}.zip
