@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             it.printStackTrace()
         }
 
-        //saving shared prefs
+        //saving shared pref
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val darkMode=sharedPreferences.getBoolean("darkMode", false)
 
