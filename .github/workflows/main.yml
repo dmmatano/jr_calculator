@@ -37,5 +37,5 @@ jobs:
       - name: Upload a Zip file
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: JrCalc
-          path: JrCalcAndroid_${{env.TAG}}.zip
+          name: JrCalculatorAndroid
+          path: Jr_Calculator_Android_${{env.TAG}}.zip
