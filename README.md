@@ -1,5 +1,5 @@
-# jr_calculator
-An android app. It's a jr. level project :)
+# Jr. Calculator
+> An android app. It's a jr. level project :)
   
 <br/>
 <br/>
